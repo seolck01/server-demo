@@ -22,14 +22,22 @@ var server = http.createServer(function(request, response){
   console.log('浏览器说：含查询字符串的路径\n' + pathWithQuery)
 
   if(path === '/'){
+    let string=fs.readFileSync('./index.html','utf-8')
     response.statusCode = 200
     response.setHeader('Content-Type', 'text/html;charset=utf-8')
-    response.write('哈哈哈')
+    response.write(string)
     response.end()
-  }else{
+  }else if(path === '/style.css'){
+    let string=fs.readFileSync('./style.css','utf-8')
+    response.statusCode = 200
+    response.setHeader('Content-Type', 'text/css;charset=utf-8')
+    response.write(string)
+    response.end()
+  }
+  else{
     response.statusCode = 404
     response.setHeader('Content-Type', 'text/html;charset=utf-8')
-    response.write('呜呜呜')
+    response.write('找不到这个路径')
     response.end()
   }
 
